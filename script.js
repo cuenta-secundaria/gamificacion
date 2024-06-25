@@ -1,5 +1,5 @@
-let nivel = parseInt(localStorage.getItem('nivel')) || 0;
-let puntosAcumulados = parseInt(localStorage.getItem('puntosAcumulados')) || 0;
+let nivel = 0;
+let puntosAcumulados = 0;
 let puntosRestantes = 100;
 
 function actualizarPantalla() {
@@ -30,10 +30,6 @@ function sumarPuntos() {
 
     actualizarPantalla();
     document.getElementById("puntos").value = '';
-
-    // Guardar en localStorage
-    localStorage.setItem('nivel', nivel);
-    localStorage.setItem('puntosAcumulados', puntosAcumulados);
 }
 
 function resetearPuntuacion() {
@@ -41,11 +37,4 @@ function resetearPuntuacion() {
     puntosAcumulados = 0;
     puntosRestantes = 100;
     actualizarPantalla();
-
-    // Limpiar localStorage
-    localStorage.removeItem('nivel');
-    localStorage.removeItem('puntosAcumulados');
 }
-
-// Actualizar pantalla al cargar la página
-actualizarPantalla();
