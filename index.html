@@ -3,25 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gameficación de Vida</title>
+    <title>Gamificar mi Vida</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Gameficación de Vida</h1>
-        <div class="info">
-            <p>Nivel: <span id="nivel">0</span></p>
-            <p>Puntos acumulados: <span id="puntos">0</span></p>
-            <p>Puntos para el siguiente nivel: <span id="puntos-siguiente">100</span></p>
+        <h1>Gamificar mi Vida</h1>
+        <div class="status">
+            <p id="nivel">Nivel: 0</p>
+            <p id="puntos-acumulados">Puntos acumulados: 0</p>
+            <p id="puntos-restantes">Puntos restantes para el siguiente nivel: 100</p>
         </div>
-        <div class="acciones">
-            <button onclick="sumarPuntos(10)">Sumar 10 puntos</button>
-            <button onclick="sumarPuntos(20)">Sumar 20 puntos</button>
-            <button onclick="sumarPuntos(30)">Sumar 30 puntos</button>
-            <button onclick="clearPuntos()">Clear</button>
-        </div>
+        <input type="number" id="puntos" placeholder="Introduce puntos">
+        <button onclick="sumarPuntos()">Sumar Puntos</button>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
