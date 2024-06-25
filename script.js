@@ -11,15 +11,28 @@ function actualizarInterfaz() {
 }
 
 // Función para sumar puntos
-function sumarPuntos(cantidad) {
-    puntos += cantidad;
+function sumarPuntos() {
+    // Obtener la cantidad de puntos ingresados por el usuario
+    let puntosASumar = parseInt(prompt("Ingresa la cantidad de puntos que deseas sumar:", "0"));
+    
+    // Verificar si la entrada es válida
+    if (isNaN(puntosASumar) || puntosASumar <= 0) {
+        alert("Por favor, ingresa un número válido mayor que cero.");
+        return;
+    }
+    
+    // Sumar los puntos ingresados
+    puntos += puntosASumar;
+    
     // Verificar si se alcanzó el siguiente nivel
     if (puntos >= puntosPorNivel) {
         nivel++;
         puntos -= puntosPorNivel;
     }
+    
     // Actualizar la interfaz
     actualizarInterfaz();
+    
     // Guardar los puntos y el nivel en el localStorage
     localStorage.setItem('puntos', puntos);
     localStorage.setItem('nivel', nivel);
@@ -29,8 +42,10 @@ function sumarPuntos(cantidad) {
 function clearPuntos() {
     puntos = 0;
     nivel = 0;
+    
     // Actualizar la interfaz
     actualizarInterfaz();
+    
     // Limpiar el localStorage
     localStorage.removeItem('puntos');
     localStorage.removeItem('nivel');
