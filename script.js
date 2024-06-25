@@ -9,7 +9,13 @@ function actualizarPantalla() {
 }
 
 function sumarPuntos() {
-    let puntos = parseInt(document.getElementById("puntos").value);
+    let puntosInput = document.getElementById("puntos").value.trim(); // Obtener el valor del input y eliminar espacios en blanco al inicio y final
+    if (puntosInput === "") {
+        alert("Por favor, introduce un número válido de puntos.");
+        return;
+    }
+
+    let puntos = parseInt(puntosInput);
     if (isNaN(puntos) || puntos <= 0) {
         alert("Por favor, introduce un número válido de puntos.");
         return;
@@ -25,5 +31,6 @@ function sumarPuntos() {
     actualizarPantalla();
     document.getElementById("puntos").value = '';
 }
+
 
 actualizarPantalla();
