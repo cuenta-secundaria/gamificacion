@@ -1,57 +1,29 @@
-// Variables para llevar el seguimiento de los puntos y el nivel
-let puntos = parseInt(localStorage.getItem('puntos')) || 0;
-let nivel = parseInt(localStorage.getItem('nivel')) || 0;
-const puntosPorNivel = 100;
+let nivel = 0;
+let puntosAcumulados = 0;
+let puntosRestantes = 100;
 
-// Función para actualizar la interfaz con los valores actuales
-function actualizarInterfaz() {
-    document.getElementById('nivel').textContent = nivel;
-    document.getElementById('puntos').textContent = puntos;
-    document.getElementById('puntos-siguiente').textContent = puntosPorNivel - (puntos % puntosPorNivel);
+function actualizarPantalla() {
+    document.getElementById("nivel").innerText = `Nivel: ${nivel}`;
+    document.getElementById("puntos-acumulados").innerText = `Puntos acumulados: ${puntosAcumulados}`;
+    document.getElementById("puntos-restantes").innerText = `Puntos restantes para el siguiente nivel: ${puntosRestantes}`;
 }
 
-// Función para sumar puntos
 function sumarPuntos() {
-    // Obtener la cantidad de puntos ingresados por el usuario
-    let puntosASumar = parseInt(prompt("Ingresa la cantidad de puntos que deseas sumar:", "0"));
-    
-    // Verificar si la entrada es válida
-    if (isNaN(puntosASumar) || puntosASumar <= 0) {
-        alert("Por favor, ingresa un número válido mayor que cero.");
+    let puntos = parseInt(document.getElementById("puntos").value);
+    if (isNaN(puntos) || puntos <= 0) {
+        alert("Por favor, introduce un número válido de puntos.");
         return;
     }
-    
-    // Sumar los puntos ingresados
-    puntos += puntosASumar;
-    
-    // Verificar si se alcanzó el siguiente nivel
-    if (puntos >= puntosPorNivel) {
+
+    puntosAcumulados += puntos;
+    while (puntosAcumulados >= 100) {
+        puntosAcumulados -= 100;
         nivel++;
-        puntos -= puntosPorNivel;
     }
-    
-    // Actualizar la interfaz
-    actualizarInterfaz();
-    
-    // Guardar los puntos y el nivel en el localStorage
-    localStorage.setItem('puntos', puntos);
-    localStorage.setItem('nivel', nivel);
+    puntosRestantes = 100 - puntosAcumulados;
+
+    actualizarPantalla();
+    document.getElementById("puntos").value = '';
 }
 
-// Función para reiniciar (clear)
-function clearPuntos() {
-    puntos = 0;
-    nivel = 0;
-    
-    // Actualizar la interfaz
-    actualizarInterfaz();
-    
-    // Limpiar el localStorage
-    localStorage.removeItem('puntos');
-    localStorage.removeItem('nivel');
-}
-
-// Al cargar la página, actualizar la interfaz con los valores almacenados
-window.onload = function() {
-    actualizarInterfaz();
-};
+actualizarPantalla();
