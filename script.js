@@ -38,11 +38,10 @@ function sumarPuntos() {
     puntosRestantes = 100 - puntosAcumulados;
 
     actualizarPantalla();
-    document.getElementById("puntos").value = '';
 
     // Guardar en localStorage después de cada actualización
-    localStorage.setItem('nivel', nivel);
-    localStorage.setItem('puntosAcumulados', puntosAcumulados);
+    localStorage.setItem('nivel', nivel.toString());
+    localStorage.setItem('puntosAcumulados', puntosAcumulados.toString());
 }
 
 // Función para resetear la puntuación
