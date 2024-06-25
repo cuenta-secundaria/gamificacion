@@ -10,6 +10,10 @@ actualizarVisualizacion();
 
 // Función para sumar puntos
 function sumarPuntos(cantidad) {
+    if (isNaN(cantidad) || cantidad <= 0) {
+        alert("Por favor, ingresa un número válido de puntos.");
+        return;
+    }
     puntos += cantidad;
     verificarNivel();
     actualizarVisualizacion();
@@ -36,7 +40,21 @@ function guardarDatos() {
     localStorage.setItem('nivel', nivel);
 }
 
-// Ejemplo de cómo sumar puntos
+// Función para reiniciar puntos y nivel
+function clearDatos() {
+    puntos = 0;
+    nivel = 0;
+    guardarDatos();
+    actualizarVisualizacion();
+}
+
+// Manejar el evento del botón para sumar puntos
 document.getElementById('sumarPuntosBtn').addEventListener('click', () => {
-    sumarPuntos(10); // Cambia el 10 por la cantidad de puntos que desees sumar
+    const puntosInput = document.getElementById('puntosInput');
+    const cantidad = parseInt(puntosInput.value);
+    sumarPuntos(cantidad);
+    puntosInput.value = ''; // Limpiar la entrada después de sumar los puntos
 });
+
+// Manejar el evento del botón "Clear"
+document.getElementById('clearBtn').addEventListener('click', clearDatos);
